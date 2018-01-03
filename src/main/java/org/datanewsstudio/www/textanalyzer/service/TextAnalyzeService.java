@@ -241,7 +241,7 @@ public class TextAnalyzeService {
         analyzers = new HashMap<>();
 
         //获取WEB-INF/nlp_system目录下所有文件(目录)lang
-        File[] nlpSystemFiles = new File(getClass().getClassLoader().getResource("../").getPath() + "nlp_system").listFiles();
+        File[] nlpSystemFiles = new File(getClass().getClassLoader().getResource("../nlp_system").getPath()).listFiles();
         for(File nlpLang : nlpSystemFiles){
             //创建分析进程
             BlockingQueue<Process> queue = new ArrayBlockingQueue<>(POOL_SIZE);

@@ -35,7 +35,7 @@ public class TextAnalyzerController {
     /**
      * 上传文件存放位置
      */
-    private static final String UPLOAD_PATH = "C:\\Users\\MissingNo\\IdeaProjects\\www.datanewsstudio.org\\upload\\";
+    private static final String UPLOAD_PATH = "D:\\www.datanewsstudio.org\\upload\\";
 
     @Resource
     private TextAnalyzeService textAnalyzeService;
