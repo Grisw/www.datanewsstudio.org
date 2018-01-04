@@ -51,7 +51,7 @@
                 <div class="container">
                     <div class="nav-header">
                         <a href="#" class="js-fh5co-nav-toggle fh5co-nav-toggle"><i></i></a>
-                        <h1 id="fh5co-logo"><a href="index.html">Content<span>Analyzing</span></a></h1>
+                        <h1 id="fh5co-logo"><a href="index.jsp">Content<span>Analyzing</span></a></h1>
                         <!-- START #fh5co-menu-wrap -->
 
                         <nav id="fh5co-menu-wrap" role="navigation" >
@@ -59,14 +59,14 @@
                             <ul class="sf-menu" id="fh5co-primary-menu" >
 
                                 <li>
-                                    <a href="portfolio.html" class="fh5co-sub-ddown">StructuredSummarization</a>
+                                    <a href="todo" class="fh5co-sub-ddown">StructuredSummarization</a>
                                 </li>
                                 <li>
-                                    <a href="text_analyzing.html" class="fh5co-sub-ddown">TextAnalyzing</a>
+                                    <a href="text_analyzer" class="fh5co-sub-ddown">TextAnalyzing</a>
                                 </li>
-                                <li><a href="blog.html">
+                                <li><a href="todo">
                                     VisualizationRecommendation</a></li>
-                                <li><a href="about.html">EventMap</a></li>
+                                <li><a href="todo">EventMap</a></li>
 
 
                             </ul>
@@ -91,7 +91,7 @@
             </div>
 
         </div>
-        <div class="copyrights">Collect from <a href="http://www.cssmoban.com/">企业网站模板</a></div>
+
         <!-- end:header-top -->
         <div id="fh5co-work-section">
             <div class="container">
@@ -107,28 +107,28 @@
                 <div class="row">
                     <div class="col-md-7 col-sm-7">
                         <div class="fh5co-grid animate-box" style="background-image: url(resources/img/summarization.jpg);">
-                            <a class="image-popup text-center" href="portfolio.html">
+                            <a class="image-popup text-center" href="todo">
 
                             </a>
                         </div>
                     </div>
                     <div class="col-md-5 col-sm-5">
                         <div class="fh5co-grid animate-box" style="background-image: url(resources/img/visual.jpg);">
-                            <a class="image-popup text-center" href="#">
+                            <a class="image-popup text-center" href="todo">
 
                             </a>
                         </div>
                     </div>
                     <div class="col-md-5 col-sm-5">
                         <div class="fh5co-grid animate-box" style="background-image: url(resources/img/eventmap.jpg);">
-                            <a class="image-popup text-center" href="#">
+                            <a class="image-popup text-center" href="todo">
 
                             </a>
                         </div>
                     </div>
                     <div class="col-md-7 col-sm-7">
                         <div class="fh5co-grid animate-box" style="background-image: url(resources/img/newstext.jpg);">
-                            <a class="image-popup text-center" href="text_analyzing.html">
+                            <a class="image-popup text-center" href="text_analyzer">
 
                             </a>
                         </div>
@@ -144,7 +144,7 @@
                 <div class="container">
                     <div class="row">
                         <div class="col-md-6 col-md-offset-3 text-center">
-
+                            <p style="color: #F9F9F9;">Copyright 2016 山东大学数据新闻工作室 SDUDataNewStudio</p>
 
                         </div>
                     </div>
