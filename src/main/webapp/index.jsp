@@ -9,7 +9,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Data News</title>
+    <title>ContentAnalyzing</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700,300' rel='stylesheet' type='text/css'>
@@ -51,24 +51,22 @@
                 <div class="container">
                     <div class="nav-header">
                         <a href="#" class="js-fh5co-nav-toggle fh5co-nav-toggle"><i></i></a>
-                        <h1 id="fh5co-logo"><a href="index.jsp">Data<span>news</span></a></h1>
+                        <h1 id="fh5co-logo"><a href="index.html">Content<span>Analyzing</span></a></h1>
                         <!-- START #fh5co-menu-wrap -->
 
-                        <nav id="fh5co-menu-wrap" role="navigation">
+                        <nav id="fh5co-menu-wrap" role="navigation" >
 
-                            <ul class="sf-menu" id="fh5co-primary-menu">
-                                <li class="active">
-                                    <a href="#">主页</a>
+                            <ul class="sf-menu" id="fh5co-primary-menu" >
+
+                                <li>
+                                    <a href="portfolio.html" class="fh5co-sub-ddown">StructuredSummarization</a>
                                 </li>
                                 <li>
-                                    <a href="portfolio.html" class="fh5co-sub-ddown">数据新闻</a>
+                                    <a href="text_analyzing.html" class="fh5co-sub-ddown">TextAnalyzing</a>
                                 </li>
-                                <li>
-                                    <a href="text_analyzer" class="fh5co-sub-ddown">分析工具</a>
-                                </li>
-                                <li><a href="about.html">HistoryMap</a></li>
-                                <li><a href="blog.html">模板</a></li>
-                                <li><a href="contact.html">关于我们</a></li>
+                                <li><a href="blog.html">
+                                    VisualizationRecommendation</a></li>
+                                <li><a href="about.html">EventMap</a></li>
 
 
                             </ul>
@@ -80,14 +78,14 @@
         </div>
 
 
-        <div class="fh5co-hero">
-            <div class="fh5co-overlay" style="background-color: rgba(255,255,255,0.2);"></div>
+        <div class="fh5co-hero" style="height: 680px">
+            <div class="fh5co-overlay" style="background-color: rgba(255,255,255,0.2);height: 680px"></div>
             <div class="fh5co-cover text-center" data-stellar-background-ratio="0.5"
-                 style="background-image: url(resources/img/home.jpg);">
+                 style=" height:680px;background-image: url(resources/img/home.jpg);">
                 <div class="desc animate-box">
-                    <h2 style="font-family: '微软雅黑';letter-spacing: 0.15em;font-size: 2.8em;">山东大学数据新闻工作室</h2>
-                    <span style="font-size: 2.4em;">SDU DATANEW STUDIO <a href="http://frehtml5.co/" target="_blank"
-                                                                          class="fh5co-site-name"></a></span>
+                    <h2 style="font-family: '微软雅黑';letter-spacing: 0.1em;font-size: 2.2em;margin-top: 5%">CONTENT ANALYZING ACCELERATION SYSTEM</h2>
+                    <!--<span style="font-size: 2.4em;">SDU DATANEW STUDIO <a href="http://frehtml5.co/" target="_blank"-->
+                    <!--class="fh5co-site-name"></a></span>-->
 
                 </div>
             </div>
@@ -99,38 +97,38 @@
             <div class="container">
                 <div class="row">
                     <div class="col-md-8 col-md-offset-2 text-center heading-section animate-box">
-                        <h1 style="font-family: '微软雅黑';margin-bottom: 2%;">功能选择</h1>
-                        <h3 style="margin-bottom: 1%;">SELECTED WORK</h3>
+                        <h1 style="font-family: '微软雅黑';margin-bottom: 2%;">FUNCTION</h1>
+
 
                     </div>
                 </div>
             </div>
             <div class="container">
                 <div class="row">
-                    <div class="col-md-8 col-sm-8">
-                        <div class="fh5co-grid animate-box" style="background-image: url(resources/img/datanews.jpg);">
+                    <div class="col-md-7 col-sm-7">
+                        <div class="fh5co-grid animate-box" style="background-image: url(resources/img/summarization.jpg);">
                             <a class="image-popup text-center" href="portfolio.html">
 
                             </a>
                         </div>
                     </div>
-                    <div class="col-md-4 col-sm-4">
-                        <div class="fh5co-grid animate-box" style="background-image: url(resources/img/template.jpg);">
+                    <div class="col-md-5 col-sm-5">
+                        <div class="fh5co-grid animate-box" style="background-image: url(resources/img/visual.jpg);">
                             <a class="image-popup text-center" href="#">
 
                             </a>
                         </div>
                     </div>
-                    <div class="col-md-4 col-sm-4">
-                        <div class="fh5co-grid animate-box" style="background-image: url(resources/img/map.jpg);">
+                    <div class="col-md-5 col-sm-5">
+                        <div class="fh5co-grid animate-box" style="background-image: url(resources/img/eventmap.jpg);">
                             <a class="image-popup text-center" href="#">
 
                             </a>
                         </div>
                     </div>
-                    <div class="col-md-8 col-sm-8">
-                        <div class="fh5co-grid animate-box" style="background-image: url(resources/img/textAn.jpg);">
-                            <a class="image-popup text-center" href="text_analyzer">
+                    <div class="col-md-7 col-sm-7">
+                        <div class="fh5co-grid animate-box" style="background-image: url(resources/img/newstext.jpg);">
+                            <a class="image-popup text-center" href="text_analyzing.html">
 
                             </a>
                         </div>
@@ -147,11 +145,7 @@
                     <div class="row">
                         <div class="col-md-6 col-md-offset-3 text-center">
 
-                            <p>Copyright 2016 Free Html5 <a href="#">Guardian</a>. All Rights Reserved. <br>Made with <i
-                                    class="icon-heart3"></i> by <a href="#/" target="_blank">Freehtml5</a> / More
-                                Templates <a href="http://www.cssmoban.com/" target="_blank" title="模板之家">模板之家</a> -
-                                Collect from <a href="http://www.cssmoban.com/" title="网页模板" target="_blank">网页模板</a>
-                            </p>
+
                         </div>
                     </div>
                 </div>
