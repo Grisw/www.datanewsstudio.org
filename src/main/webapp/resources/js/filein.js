@@ -8,10 +8,10 @@ $(document).ready(function () {
     });
 });
 
-function upload() {
+function upload(analyzeUrl, resultUrl) {
     $.ajax({
         type: 'POST',
-        url: '/text_analyzer/analyze',
+        url: analyzeUrl,
         xhrFields: {
             withCredentials: true
         },
@@ -20,7 +20,7 @@ function upload() {
         processData: false,
         data: new FormData($('#fileinput')[0]),
         complete: function () {
-            window.location.href = '/text_analyzer/result'
+            window.location.href = resultUrl;
         },
         message: function (xhr) {
             var jsons = xhr.currentResponseText.split('}{');

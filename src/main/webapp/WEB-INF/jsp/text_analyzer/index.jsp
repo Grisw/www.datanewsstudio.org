@@ -1,3 +1,4 @@
+<%@ page import="org.datanewsstudio.www.common.Urls" %>
 <%@ page pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <!--[if lt IE 7]> <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
@@ -49,12 +50,12 @@
                 <div class="container">
                     <div class="nav-header">
                         <a href="#" class="js-fh5co-nav-toggle fh5co-nav-toggle"><i></i></a>
-                        <h1 id="fh5co-logo"><a href="index.jsp">Content<span>Analyzing</span></a></h1>
+                        <h1 id="fh5co-logo"><a href="<%=Urls.index%>">Content<span>Analyzing</span></a></h1>
                         <!-- START #fh5co-menu-wrap -->
                         <nav id="fh5co-menu-wrap" role="navigation">
                             <ul class="sf-menu" id="fh5co-primary-menu">
                                 <li>
-                                    <a href="index.jsp">HOME</a>
+                                    <a href="<%=Urls.index%>">HOME</a>
                                 </li>
 
                             </ul>
@@ -110,7 +111,7 @@
                     <div style="text-align:center;">
                         <button type="button" class="btn btn-info"
                                 style="margin-top: 10%;margin-bottom:3%;font-family: '微软雅黑',sans-serif;font-size: 1.1em;"
-                                onclick="upload()">Start Analyzing
+                                onclick="upload('<%=Urls.TextAnalyzer.analyze%>','<%=Urls.TextAnalyzer.result%>')">Start Analyzing
                         </button>
                     </div>
                 </div>

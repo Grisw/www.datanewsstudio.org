@@ -1,3 +1,4 @@
+<%@ page import="org.datanewsstudio.www.common.Urls" %>
 <%@ page pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <!--[if lt IE 7]> <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
@@ -51,7 +52,7 @@
                 <div class="container">
                     <div class="nav-header">
                         <a href="#" class="js-fh5co-nav-toggle fh5co-nav-toggle"><i></i></a>
-                        <h1 id="fh5co-logo"><a href="index.jsp">Content<span>Analyzing</span></a></h1>
+                        <h1 id="fh5co-logo"><a href="<%=Urls.index%>">Content<span>Analyzing</span></a></h1>
                         <!-- START #fh5co-menu-wrap -->
 
                         <nav id="fh5co-menu-wrap" role="navigation" >
@@ -62,11 +63,11 @@
                                     <a href="todo" class="fh5co-sub-ddown">StructuredSummarization</a>
                                 </li>
                                 <li>
-                                    <a href="text_analyzer" class="fh5co-sub-ddown">TextAnalyzing</a>
+                                    <a href="<%=Urls.TextAnalyzer.index%>" class="fh5co-sub-ddown">TextAnalyzing</a>
                                 </li>
                                 <li><a href="todo">
                                     VisualizationRecommendation</a></li>
-                                <li><a href="todo">EventMap</a></li>
+                                <li><a href="<%=Urls.EventMap.index%>">EventMap</a></li>
 
 
                             </ul>
@@ -121,14 +122,14 @@
                     </div>
                     <div class="col-md-5 col-sm-5">
                         <div class="fh5co-grid animate-box" style="background-image: url(resources/img/eventmap.jpg);">
-                            <a class="image-popup text-center" href="todo">
+                            <a class="image-popup text-center" href="<%=Urls.EventMap.index%>">
 
                             </a>
                         </div>
                     </div>
                     <div class="col-md-7 col-sm-7">
                         <div class="fh5co-grid animate-box" style="background-image: url(resources/img/newstext.jpg);">
-                            <a class="image-popup text-center" href="text_analyzer">
+                            <a class="image-popup text-center" href="<%=Urls.TextAnalyzer.index%>">
 
                             </a>
                         </div>
