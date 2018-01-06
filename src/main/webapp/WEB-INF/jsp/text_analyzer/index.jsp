@@ -91,7 +91,7 @@
                 <div class="col-md-3 "></div>
                 <div class="col-md-6 " style="text-align: center;">
                     <p style="font-size:1.4em;font-family: '微软雅黑',sans-serif;margin-bottom: -1%" >please follow the specific txt format</p>
-                    <a href="#" style="font-size: 1.1em;"> click here to get a sample format</a>
+                    <a href="todo" style="font-size: 1.1em;"> click here to get a sample format</a>
                     <form id="fileinput" enctype="multipart/form-data" method="post">
                         <div style="margin-top: 5%">
                             <!--<h4 class="center-block">Choose a Language</h4>-->
@@ -151,7 +151,6 @@
 <script src="resources/js/bootstrap.min.js"></script>
 <!-- Waypoints -->
 <script src="resources/js/jquery.waypoints.min.js"></script>
-<script src="resources/js/jquery.form.js"></script>
 <!-- Stellar -->
 <script src="resources/js/jquery.stellar.min.js "></script>
 <!-- Superfish -->
