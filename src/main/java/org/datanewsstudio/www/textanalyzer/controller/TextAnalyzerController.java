@@ -52,7 +52,7 @@ public class TextAnalyzerController {
                                        @RequestParam("files") final MultipartFile[] files,
                                        @RequestParam("lang") final String lang) {
         //使用ResponseBodyEmitter以随时通知浏览器上传和分析进度
-        final ResponseBodyEmitter emitter = new ResponseBodyEmitter();
+        final ResponseBodyEmitter emitter = new ResponseBodyEmitter(0L);
 
         new Thread(new Runnable() {
             public void run() {

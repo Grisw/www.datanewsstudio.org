@@ -86,17 +86,21 @@
                     </div>
                 </div>
             </div>
-            <div class="row row-bottom-padded-lg">
+            <div class="row">
 
                 <div class="col-md-3 "></div>
                 <div class="col-md-6 " style="text-align: center;">
                     <p style="font-size:1.4em;font-family: '微软雅黑',sans-serif;margin-bottom: -1%" >please follow the specific xls/xlsx format</p>
                     <a href="todo" style="font-size: 1.1em;">click here to get a sample format</a>
-
                     <div style="margin-top: 5%;">
                         <input id="input-6" name="files" type="file" class="file-loading" style="text-align: center;">
                     </div>
-
+                </div>
+                <div class="col-md-3"></div>
+            </div>
+            <div class="row row-bottom-padded-lg">
+                <div class="col-md-2"></div>
+                <div class="col-md-8">
                     <div id="table" style="overflow: auto; height: 600px; width: 100%;margin-top: 5%"></div>
 
                     <div style="text-align:center;">
@@ -106,8 +110,8 @@
                         </button>
                     </div>
                 </div>
+                <div class="col-md-2"></div>
             </div>
-
 
         </div>
         <!-- END fh5co-page -->
