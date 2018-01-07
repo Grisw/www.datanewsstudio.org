@@ -8,7 +8,13 @@ $(document).ready(function () {
     });
 });
 
-function upload(analyzeUrl, resultUrl) {
+function upload(button, analyzeUrl, resultUrl) {
+    if($('#input-6').val() === ''){
+        return;
+    }
+    button = $(button);
+    button.text('Analyzing...');
+    button.attr("disabled", true);
     $.ajax({
         type: 'POST',
         url: analyzeUrl,
@@ -20,6 +26,7 @@ function upload(analyzeUrl, resultUrl) {
         processData: false,
         data: new FormData($('#fileinput')[0]),
         complete: function () {
+            button.text('Completed!');
             window.location.href = resultUrl;
         },
         message: function (xhr) {
@@ -45,8 +52,10 @@ function upload(analyzeUrl, resultUrl) {
                 }
             });
         },
-        error: function (ex) {
+        error: function () {
             alert("Unknown error.");
+            button.text('Start Analyzing');
+            button.attr("disabled", false);
         }
     });
 }

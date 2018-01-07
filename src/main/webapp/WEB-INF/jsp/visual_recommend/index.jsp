@@ -12,7 +12,7 @@
     <base href="../">
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>News Text Analyzing</title>
+    <title>Visualization Recommendation</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700,300' rel='stylesheet' type='text/css'>
@@ -28,7 +28,7 @@
 
     <link rel="stylesheet" href="resources/css/style.css">
     <link rel="stylesheet" href="resources/css/fileinput.min.css">
-    <link rel="stylesheet" href="resources/css/text_analyzing.css"/>
+    <link rel="stylesheet" href="resources/css/handsontable.full.min.css">
     <!-- Modernizr JS -->
     <script src="resources/js/modernizr-2.6.2.min.js"></script>
 
@@ -71,8 +71,7 @@
             <div class="fh5co-cover fh5co-cover_2 text-center" data-stellar-background-ratio="0.5"
                  style="background-image: url(resources/img/TABG.jpg);">
                 <div class="desc animate-box">
-                    <h2 style="font-family: '微软雅黑',sans-serif;letter-spacing: 0.1em;font-size: 2.2em;margin-top: 4%">NEWS TEXT
-                        ANALYZING</h2>
+                    <h2 style="font-family: '微软雅黑',sans-serif;letter-spacing: 0.1em;font-size: 2.2em;margin-top: 4%">VISUALIZATION RECOMMENDATION</h2>
 
                 </div>
             </div>
@@ -83,7 +82,7 @@
             <div class="container">
                 <div class="row">
                     <div class="col-md-8 col-md-offset-2 text-center heading-section animate-box" style="margin-bottom: 2%">
-                        <h1 style="font-family: '微软雅黑',sans-serif;margin-bottom: 1%;">UPLOAD NEWS</h1>
+                        <h1 style="font-family: '微软雅黑',sans-serif;margin-bottom: 1%;">UPLOAD DATA</h1>
                     </div>
                 </div>
             </div>
@@ -91,27 +90,19 @@
 
                 <div class="col-md-3 "></div>
                 <div class="col-md-6 " style="text-align: center;">
-                    <p style="font-size:1.4em;font-family: '微软雅黑',sans-serif;margin-bottom: -1%" >please follow the specific txt format</p>
-                    <a href="todo" style="font-size: 1.1em;"> click here to get a sample format</a>
-                    <form id="fileinput" enctype="multipart/form-data" method="post">
-                        <div style="margin-top: 5%">
-                            <!--<h4 class="center-block">Choose a Language</h4>-->
-                            <select name="lang" class="form-control center-block" style="width: 15%;margin-bottom: 5%;">
-                                <option value="en">English</option>
-                                <option value="zh-cn">中文</option>
+                    <p style="font-size:1.4em;font-family: '微软雅黑',sans-serif;margin-bottom: -1%" >please follow the specific xls/xlsx format</p>
+                    <a href="todo" style="font-size: 1.1em;">click here to get a sample format</a>
 
-                            </select>
-                        </div>
-                        <input id="input-6" name="files" type="file" multiple class="file-loading"
-                               style="text-align: center;">
-                    </form>
+                    <div style="margin-top: 5%;">
+                        <input id="input-6" name="files" type="file" class="file-loading" style="text-align: center;">
+                    </div>
 
-                    <!-- 这里是文件上传-->
+                    <div id="table" style="overflow: auto; height: 600px; width: 100%;margin-top: 5%"></div>
 
                     <div style="text-align:center;">
                         <button type="button" class="btn btn-info"
-                                style="margin-top: 10%;margin-bottom:3%;font-family: '微软雅黑',sans-serif;font-size: 1.1em;"
-                                onclick="upload(this, '<%=Urls.TextAnalyzer.analyze%>','<%=Urls.TextAnalyzer.result%>')">Start Analyzing
+                                style="margin-top: 5%;margin-bottom:3%;font-family: '微软雅黑',sans-serif;font-size: 1.1em;"
+                                onclick="todo">Start Analyzing
                         </button>
                     </div>
                 </div>
@@ -158,9 +149,11 @@
 <script src="resources/js/hoverIntent.js "></script>
 <script src="resources/js/superfish.js "></script>
 <script src="resources/js/bootstrap.fileinput.min.js "></script>
+<script src="resources/js/handsontable.full.min.js "></script>
+<script src="resources/js/xlsx.full.min.js "></script>
 <!-- Main JS (Do not remove) -->
 <script src="resources/js/main.js "></script>
-<script src="resources/js/filein.js"></script>
+<script src="resources/js/visualrecommend.js "></script>
 
 </body>
 

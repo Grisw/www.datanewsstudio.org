@@ -65,8 +65,7 @@
                                 <li>
                                     <a href="<%=Urls.TextAnalyzer.index%>" class="fh5co-sub-ddown">TextAnalyzing</a>
                                 </li>
-                                <li><a href="todo">
-                                    VisualizationRecommendation</a></li>
+                                <li><a href="<%=Urls.VisualRecommend.index%>">VisualizationRecommendation</a></li>
                                 <li><a href="<%=Urls.EventMap.index%>">EventMap</a></li>
 
 
@@ -115,7 +114,7 @@
                     </div>
                     <div class="col-md-5 col-sm-5">
                         <div class="fh5co-grid animate-box" style="background-image: url(resources/img/visual.jpg);">
-                            <a class="image-popup text-center" href="todo">
+                            <a class="image-popup text-center" href="<%=Urls.VisualRecommend.index%>">
 
                             </a>
                         </div>

@@ -10,6 +10,10 @@ public abstract class Urls {
         public static final String result = "text_analyzer/result";
     }
 
+    public static abstract class VisualRecommend {
+        public static final String index = "visual_recommend";
+    }
+
     public static abstract class EventMap {
         public static final String index = "todo";
     }
