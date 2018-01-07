@@ -160,8 +160,6 @@
 <!-- END fh5co-wrapper -->
 
 <!-- jQuery -->
-
-
 <script src="resources/js/jquery.min.js"></script>
 <!-- jQuery Easing -->
 <script src="resources/js/jquery.easing.1.3.js"></script>

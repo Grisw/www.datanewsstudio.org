@@ -7,14 +7,16 @@ import org.apache.lucene.index.IndexWriterConfig;
 import org.apache.lucene.store.Directory;
 import org.apache.lucene.store.FSDirectory;
 import org.datanewsstudio.www.common.FileSystem;
+import org.datanewsstudio.www.textanalyzer.model.ContentItem;
 import org.datanewsstudio.www.textanalyzer.model.FileUploadResponse;
 import org.datanewsstudio.www.textanalyzer.model.NlpResult;
-import org.datanewsstudio.www.textanalyzer.model.SearchResult;
+import org.datanewsstudio.www.textanalyzer.model.SearchItem;
 import org.datanewsstudio.www.textanalyzer.service.TextAnalyzeService;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseBodyEmitter;
@@ -158,6 +160,7 @@ public class TextAnalyzerController {
 
                     //设置session
                     session.setAttribute("data", sessionData);
+                    session.setAttribute("lang", lang);
                 }else{  //参数错误
                     try {
                         if(lang == null){
@@ -191,7 +194,7 @@ public class TextAnalyzerController {
 
         //用于计算平均词频，[0]表示统计词频，[1]表示统计次数
         Map<String, double[]> _keywords = new HashMap<>();
-        //散点图和玫瑰图数据。[0]: time, [1]: sentiment, [2]: title.
+        //散点图和柱形图数据。[0]: time, [1]: sentiment, [2]: title.
         List<String[]> scatters = new ArrayList<>();
         for(NlpResult i : nlpResults){
             //统计Keywords
@@ -205,7 +208,7 @@ public class TextAnalyzerController {
                 }
             }
 
-            //散点和玫瑰数据
+            //散点和柱形数据
             scatters.add(new String[]{i.getTime(), i.getSentiment()+"", i.getTitle()});
         }
 
@@ -216,8 +219,9 @@ public class TextAnalyzerController {
             keywords.put(entry.getKey(), entry.getValue()[0] / entry.getValue()[1]);
         }
 
-        mv.addObject("keywords",keywords);
-        mv.addObject("scatters",scatters);
+        mv.addObject("keywords", keywords);
+        mv.addObject("scatters", scatters);
+        mv.addObject("lang", session.getAttribute("lang"));
         return mv;
     }
 
@@ -231,11 +235,37 @@ public class TextAnalyzerController {
             return new ModelAndView("text_analyzer/404");
         }
 
-        List<SearchResult> resultList = textAnalyzeService.search(Paths.get(UPLOAD_PATH + session.getId(),"index.lucene"), keyword, page, lang);
+        TextAnalyzeService.SearchResult resultList = textAnalyzeService.search((Map<String, NlpResult>) session.getAttribute("data"), Paths.get(UPLOAD_PATH + session.getId(),"index.lucene"), keyword, page, lang);
 
-        for (SearchResult searchResult : resultList){
-            LOGGER.info(searchResult.getTitle() + "/" + searchResult.getTime() + "/" + searchResult.getContent() + "/" + searchResult.getFilename());
+        ModelAndView mv = new ModelAndView("text_analyzer/search");
+        mv.addObject("result", resultList.getItems());
+        mv.addObject("totalHits", resultList.getTotalHits());
+        mv.addObject("resultPerPage", resultList.getResultPerPage());
+        mv.addObject("lang", lang);
+        return mv;
+    }
+
+    @RequestMapping(value = "/content", method = RequestMethod.POST)
+    public @ResponseBody ContentItem content(HttpSession session,
+                       @RequestParam("name") String name){
+        //如果不存在session则返回404页面
+        if(session.getAttribute("data") == null){
+            return new ContentItem(ContentItem.Code.DATA_NOT_FOUND);
         }
-        return new ModelAndView("text_analyzer/index");//TODO 这里需要返回带结果的ModelAndView
+
+        NlpResult nlpResult = ((Map<String, NlpResult>) session.getAttribute("data")).get(name);
+
+        if(nlpResult == null){
+            return new ContentItem(ContentItem.Code.FILE_NOT_FOUND);
+        }
+
+        String content = textAnalyzeService.getFileContent(new File(UPLOAD_PATH + session.getId() + "\\" + name));
+        NlpResult.Keyword[] _keywords = nlpResult.getKeywords();
+        String[] keywords = new String[_keywords.length];
+        for(int i = 0; i < keywords.length; i++){
+            keywords[i] = _keywords[i].getWord();
+        }
+
+        return new ContentItem(ContentItem.Code.SUCCESS, nlpResult.getTitle(), nlpResult.getTime(), content, nlpResult.getAbstracts(), keywords);
     }
 }

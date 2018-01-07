@@ -8,6 +8,8 @@ public abstract class Urls {
         public static final String index = "text_analyzer";
         public static final String analyze = "text_analyzer/analyze";
         public static final String result = "text_analyzer/result";
+        public static final String search = "text_analyzer/search";
+        public static final String content = "text_analyzer/content";
     }
 
     public static abstract class VisualRecommend {

@@ -1,69 +1,121 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+<%@ page import="org.datanewsstudio.www.common.Urls" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page pageEncoding="UTF-8" %>
+<!DOCTYPE html>
+<html>
 
 <head>
-    <meta http-equiv="X-UA-Compatible" content="IE=emulateIE7"/>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <base href="../">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Keywords Searching</title>
-    <link href="css/Search/bootstrap.min.css" rel="stylesheet" type="text/css"/>
-    <link href="css/Search/style.css" rel="stylesheet" type="text/css"/>
-    <link href="css/Search/result.css" rel="stylesheet" type="text/css"/>
-    <link href="css/Search/animate.min.css" rel="stylesheet" type="text/css"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
+    <!-- Animate.css -->
+    <link rel="stylesheet" href="resources/css/animate.css">
+    <!-- Icomoon Icon Fonts-->
+    <link rel="stylesheet" href="resources/css/icomoon.css">
+    <!-- Bootstrap  -->
+    <link rel="stylesheet" href="resources/css/bootstrap.css">
+    <!-- Superfish -->
+    <link rel="stylesheet" href="resources/css/superfish.css">
+
+    <link rel="stylesheet" href="resources/css/style.css">
+    <!-- Modernizr JS -->
+    <script src="resources/js/modernizr-2.6.2.min.js"></script>
+
+    <!-- FOR IE9 below -->
+    <!--[if lt IE 9]>
+    <script src="/resources/js/respond.min.js"></script>
+    <![endif]-->
 </head>
 
 <body>
 
+<div id="fh5co-header">
+    <header id="fh5co-header-section">
+        <div class="container">
+            <div class="nav-header">
+                <a href="#" class="js-fh5co-nav-toggle fh5co-nav-toggle"><i></i></a>
+                <h1 id="fh5co-logo" style="margin-top: 2.5%"><a href="<%=Urls.index%>">Content<span>Analyzing</span></a></h1>
+                <!-- START #fh5co-menu-wrap -->
+                <nav id="fh5co-menu-wrap" role="navigation">
+                    <ul class="sf-menu" id="fh5co-primary-menu">
+                        <li>
+                            <a href="<%=Urls.index%>">HOME</a>
+                        </li>
 
-
-
-<div id="hd" class="ue-clear">
-    <div>
-
-        <script type="text/javascript">
-            function submitBtnClick() {
-                window.location.href = "result.html?page=1&term=" + encodeURIComponent($('#inputsearch').val());
-            }
-        </script>
-
-        <div class="form-group">
-            <div class="col-sm-3"></div>
-            <div class="col-sm-5" style="text-align: center">
-                <!--这里是表单代码-->
-                <input class="form-control" id="inputsearch" type="text" placeholder="Input a keyword">
-
+                    </ul>
+                </nav>
             </div>
-            <div class="col-sm-2" style="text-align: left">
-                <a class="btn btn-info" style="font-family: '微软雅黑';font-size: 1em;margin-top: 1%;"
-                   onclick="submitBtnClick()">SEARCH</a>
-            </div>
-            <div class="col-sm-2"></div>
+        </div>
+    </header>
+</div>
+
+<div class="fh5co-hero fh5co-hero-2" style="height: 100px">
+    <div class="fh5co-overlay" style="height: 100px"></div>
+    <div class="fh5co-cover fh5co-cover_2 text-center" data-stellar-background-ratio="0.5"
+         style="background-image: url(resources/img/TABG.jpg);height: 100px">
+
+    </div>
+</div>
+
+<form class="form-horizontal" style="margin-top:3%;">
+    <div class="form-group">
+        <div class="col-sm-3"></div>
+        <div class="col-sm-5" style="text-align: center">
+            <!--这里是表单代码-->
+            <input class="form-control" id="inputsearch" type="text" placeholder="Input a keyword">
+
+        </div>
+        <div class="col-sm-2" style="text-align: left">
+            <a class="btn btn-info" style="font-family: '微软雅黑';font-size: 1em;margin-top: 1%;"
+               onclick="searchresult(1)">SEARCH</a>
+        </div>
+        <div class="col-sm-2"></div>
+    </div>
+</form>
+
+<div style="padding: 2%">
+    <div class="resultArea">
+        <div class="resultList">
+            <c:forEach items="${result}" var="item">
+                <div id="template" class="resultItem">
+                    <div class="itemHead">
+                        <a id="title" href="JavaScript:void(0);" onclick="modalShow('#bigModal', '', modalDataInit, '${item.filename}', '<%=Urls.TextAnalyzer.content%>');" target="_blank"
+                           class="title">${item.title}</a> <span class="divsion">-</span>
+                        <span class="fileType">
+                                    <span>Keywords: </span>
+                            <span id="keywords" class="value">
+                                <c:forEach items="${item.keywords}" var="keyword">
+                                    <c:out value="${keyword};"/>
+                                </c:forEach>
+                            </span>
+                        </span>
+                        &nbsp;&nbsp;
+                        <span class="dependValue">
+                                    <span>Sentiment: </span>
+                            <span id="sentiment" class="value">${item.sentiment}</span>
+                        </span>
+                    </div>
+                    <div id="content" class="itemBody">
+                            ${item.content}
+                    </div>
+                    <div class="itemFoot">
+                            <span class="info">
+                                    <label>Public Time: </label>
+                                    <span id="time" class="value">${item.time}</span>
+                            </span>
+                    </div>
+                </div>
+            </c:forEach>
         </div>
     </div>
-</div>
 
-<div class="sideBarShowHide">
-    <a href="javascript:;" class="icon"></a>
-</div>
-</div>
-<div class="resultArea">
-    <p class="resultTotal">
-        <span class="info">found&nbsp;<span id="result_count" class="totalResult">0</span>&nbsp;results，about<span
-                id="result_page" class="totalPage">0</span>page</span>
-        <span class="orderOpt">
-                    	<a href="javascript:;" class="byTime">sorted by time</a>
-                        <a href="javascript:;" class="byDependence">Sort by correlation</a>
-                    </span>
-    </p>
-    <div id="result_list" class="resultList">
+    <!-- 分页 -->
+    <div class="pagination"></div>
 
-    </div>
 </div>
-<!-- 分页 -->
-<div class="pagination ue-clear"></div>
-<!-- 相关搜索 -->
 
 <div class="modal bs-example-modal-lg" onclick="modalHide('#bigModal', '');" id="bigModal">
     <div class="modal-dialog modal-lg">
@@ -80,12 +132,12 @@
                 </p>
             </div>
 
-            <div class="modal-content" style="padding-top: 0em;background: #F5F5F5;">
+            <div class="modal-content" style="padding-top: 0;background: #F5F5F5;overflow: scroll;height: 600px;">
 
                 <p id="modal_abstract" style="text-align: left; padding-top: 1.5em;font-size: 1.5em">
                     Abstract：
                 </p>
-                </br>
+                <br/>
 
                 <p id="modal_content" style="text-align: left;font-size: 1.5em">
                     Original Text：
@@ -96,148 +148,59 @@
     </div>
 </div>
 
-</div>
-<!-- End of main -->
-</div>
-<!--End of bd-->
-</div>
-
-<div id="template" class="hidden resultItem">
-    <div class="itemHead">
-        <a id="title" href="JavaScript:void(0);" onclick="modalShow('#bigModal', '', modalDataInit, 0);" target="_blank"
-           class="title">{title}</a> <span class="divsion">-</span>
-        <span class="fileType">
-                            	<span>关键词(KeyWords)：</span>
-						<span id="keywords" class="value">{keywords}</span>
-						</span>
-        <span class="dependValue">
-                            	<span>情绪值：</span>
-						<span id="sentiment" class="value">{sentiment}</span>
-						</span>
-    </div>
-    <div id="content" class="itemBody">
-        {content}
-    </div>
-    <div class="itemFoot">
-						<span class="info">
-                            	<label>发布时间：</label>
-                                <span id="time" class="value">{time}</span>
-						</span>
-    </div>
-</div>
-
-<script src="js/Search/jquery.min.js" type="text/javascript" charset="utf-8"></script>
-<script type="text/javascript" src="js/Search/global.js"></script>
-<script type="text/javascript" src="js/Search/pagination.js"></script>
-<script type="text/javascript" src="js/Search/bootstrap.min.js"></script>
-<script type="text/javascript" src="js/Search/Pop.js"></script>
-<script>
-    function GetQueryString(name) {
-        var reg = new RegExp('(^|&)' + name + '=([^&]*)(&|$)');
-        var r = window.location.search.substr(1).match(reg);
-        if (r != null) return decodeURIComponent(r[2]);
-        return null;
-    }
-
-    var term = GetQueryString("term");
-    var page = GetQueryString("page");
-    $("#inputsearch").val(term);
-    if (page == undefined) {
-        page = 1;
-    }
-    $.ajax({
-        url: 'http://localhost/nlp_api/public/search',
-        type: 'get',
-        data: {'term': term, 'page': page},
-        dataType: 'json',
-        xhrFields: {
-            withCredentials: true
-        },
-        success: function (data) {
-            var tpl = $("#template");
-            var resultList = $("#result_list");
-            var reg = new RegExp("(" + term + ")", "gi");
-            $("#result_count").html(data['count']);
-            $("#result_page").html(data['count'] / 10);
-            for (var item in data['result']) {
-                var template = tpl.clone(true, true);
-                template.removeClass("hidden");
-                template.find("#title").attr('onclick', "modalShow('#bigModal', '', modalDataInit, '" + data['result'][item]['name'] + "');");
-                template.find("#title").html(data['result'][item]['title'].replace(reg, "<span class='keyWord'>$1</span>"));
-                template.find("#keywords").html(data['result'][item]['keywords'].toString().replace(reg, "<span class='keyWord'>$1</span>"));
-                template.find("#sentiment").html(data['result'][item]['sentiment']);
-                template.find("#content").html(data['result'][item]['content'].replace(reg, "<span class='keyWord'>$1</span>"));
-                template.find("#time").html(data['result'][item]['time']);
-                resultList.append(template);
-            }
-
-            //分页
-            $(".pagination").pagination(data['count'], {
-                current_page: page - 1, //当前页码
-                items_per_page: 10,
-                display_msg: true,
-                callback: function (page_id, jq) {
-                    window.location.href = "result.html?page=" + (page_id + 1) + "&term=" + encodeURIComponent(term);
-                }
-            });
-        },
-        error: function (request, status) {
-            alert("TODO 发生错误：" + request.responseText);
-        }
-    });
-</script>
 </body>
 
+<script type="text/javascript" src="resources/js/jquery.min.js"></script>
+<!-- jQuery Easing -->
+<script src="resources/js/jquery.easing.1.3.js " type="text/javascript"></script>
+<!-- Waypoints -->
+<script src="resources/js/jquery.waypoints.min.js " type="text/javascript"></script>
+<!-- Stellar -->
+<script src="resources/js/jquery.stellar.min.js " type="text/javascript"></script>
+<!-- Superfish -->
+<script src="resources/js/hoverIntent.js " type="text/javascript"></script>
+<script src="resources/js/superfish.js " type="text/javascript"></script>
+<!-- Main JS (Do not remove) -->
+<script src="resources/js/main.js " type="text/javascript"></script>
+<script type="text/javascript" src="resources/js/pagination.js"></script>
+<script type="text/javascript" src="resources/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="resources/js/pop.js"></script>
 
 <script type="text/javascript">
-    $('.searchList').on('click', '.searchItem', function () {
-        $('.searchList .searchItem').removeClass('current');
-        $(this).addClass('current');
-    });
+    $(document).ready(function () {
+        function GetQueryString(name) {
+            var reg = new RegExp('(^|&)' + name + '=([^&]*)(&|$)');
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) return decodeURIComponent(r[2]);
+            return null;
+        }
 
-    $.each($('.subfieldContext'), function (i, item) {
-        $(this).find('li:gt(2)').hide().end().find('li:last').show();
-    });
+        var term = GetQueryString("term");
+        var page = GetQueryString("page");
+        $("#inputsearch").val(term);
+        if (!page) {
+            page = 1;
+        }
 
-    $('.subfieldContext .more').click(function (e) {
-        var $more = $(this).parent('.subfieldContext').find('.more');
-        if ($more.hasClass('show')) {
-
-            if ($(this).hasClass('define')) {
-                $(this).parent('.subfieldContext').find('.more').removeClass('show').find('.text').text('自定义');
-            } else {
-                $(this).parent('.subfieldContext').find('.more').removeClass('show').find('.text').text('更多');
+        $(".pagination").bsPagination({
+            totalRecord: <c:out value="${totalHits}"/>,
+            recordPerPage: <c:out value="${resultPerPage}"/>,
+            currentPage: page,
+            setLinkAttr: function (p) {
+                return 'href="javascript:searchresult('+p+')"';
             }
-            $(this).parent('.subfieldContext').find('li:gt(2)').hide().end().find('li:last').show();
-        } else {
-            $(this).parent('.subfieldContext').find('.more').addClass('show').find('.text').text('收起');
-            $(this).parent('.subfieldContext').find('li:gt(2)').show();
-        }
-
+        });
     });
+</script>
 
-    $('.sideBarShowHide a').click(function (e) {
-        if ($('#main').hasClass('sideBarHide')) {
-            $('#main').removeClass('sideBarHide');
-            $('#container').removeClass('sideBarHide');
-        } else {
-            $('#main').addClass('sideBarHide');
-            $('#container').addClass('sideBarHide');
-        }
-
-    });
-
-    setHeight();
-    $(window).resize(function () {
-        setHeight();
-    });
-
-    function setHeight() {
-        if ($('#container').outerHeight() < $(window).height()) {
-            $('#container').height($(window).height() - 33);
+<script type="text/javascript">
+    function searchresult(page) {
+        var keyword = $('#inputsearch').val();
+        if (keyword && keyword.trim().length > 0) {
+            page = page && page >=1?page : 1;
+            window.location.href = '<%=Urls.TextAnalyzer.search%>?page='+page+'&lang=<c:out value="${lang}"/>&keyword=' + keyword;
         }
     }
 </script>
-
 
 </html>

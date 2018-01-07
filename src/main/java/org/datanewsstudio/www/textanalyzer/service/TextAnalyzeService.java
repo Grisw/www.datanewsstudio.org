@@ -22,7 +22,7 @@ import org.apache.lucene.store.Directory;
 import org.apache.lucene.store.FSDirectory;
 import org.datanewsstudio.www.textanalyzer.model.FileUploadResponse;
 import org.datanewsstudio.www.textanalyzer.model.NlpResult;
-import org.datanewsstudio.www.textanalyzer.model.SearchResult;
+import org.datanewsstudio.www.textanalyzer.model.SearchItem;
 import org.springframework.stereotype.Service;
 import org.springframework.web.util.HtmlUtils;
 
@@ -83,11 +83,11 @@ public class TextAnalyzeService {
                 result = JSON.parseObject(reader.nextLine());
             }catch (NoSuchElementException e){
                 return new FileUploadResponse(FileUploadResponse.Code.FORMAT_ERROR, file.getName());
+            }finally {
+                //归还处理程序
+                LOGGER.info("Return process '" + lang + "'.");
+                pyQueue.get(lang).put(process);
             }
-
-            //归还处理程序
-            LOGGER.info("Return process '" + lang + "'.");
-            pyQueue.get(lang).put(process);
 
             FileUploadResponse.Code code = FileUploadResponse.Code.getCode(result.getIntValue("code"));
 
@@ -168,10 +168,21 @@ public class TextAnalyzeService {
         }
     }
 
-    public List<SearchResult> search(Path indexPath, String keyword, int page, String lang){
-        List<SearchResult> result = new ArrayList<>();
+    /**
+     * 搜索关键字
+     *
+     * @param nlpData 已经分析完成的数据
+     * @param indexPath 索引路径
+     * @param keyword 关键字
+     * @param page 分页查询页码
+     * @param lang 查询语言
+     * @return 存储了总结果数，结果以及每页结果数的对象。
+     */
+    public SearchResult search(Map<String, NlpResult> nlpData, Path indexPath, String keyword, int page, String lang){
+        List<SearchItem> result = new ArrayList<>();
         DirectoryReader reader = null;
         Directory fsDirectory = null;
+        int totalHits = 0;
         try {
             //读取索引
             Analyzer analyzer = getLuceneAnalyzer(lang);
@@ -191,8 +202,9 @@ public class TextAnalyzeService {
 
             //查询
             ScoreDoc[] hits;
+            totalHits = searcher.count(query);
             if(page < 1){
-                return result;
+                return new SearchResult(totalHits, result);
             }else if(page == 1){
                 hits = searcher.search(query, RESULT_PER_PAGE, Sort.RELEVANCE).scoreDocs;
             }else{
@@ -210,7 +222,13 @@ public class TextAnalyzeService {
                     title = doc.getField("title").stringValue();
                 if(time == null)
                     time = doc.getField("time").stringValue();
-                SearchResult item = new SearchResult(title, time, content, doc.getField("filename").stringValue());
+                String filename = doc.getField("filename").stringValue();
+                NlpResult.Keyword[] _keywords = nlpData.get(filename).getKeywords();
+                String[] keywords = new String[_keywords.length];
+                for(int i = 0; i < keywords.length; i++){
+                    keywords[i] = _keywords[i].getWord();
+                }
+                SearchItem item = new SearchItem(title, time, content, filename, keywords, nlpData.get(filename).getSentiment());
                 result.add(item);
             }
         } catch (IOException e) {
@@ -229,7 +247,44 @@ public class TextAnalyzeService {
                     LOGGER.error("An error occurred while closing DirectoryReader or FSDirectory.", e);
                 }
         }
-        return result;
+        return new SearchResult(totalHits, result);
+    }
+
+    /**
+     * 获取文章内容
+     *
+     * @param file 文件
+     * @return 文章内容
+     */
+    public String getFileContent(File file){
+        BufferedReader reader = null;
+        try {
+            reader = new BufferedReader(new FileReader(file));
+            String title = reader.readLine();
+            String time = reader.readLine();
+            StringBuilder content = new StringBuilder();
+            String buf;
+            while((buf = reader.readLine())!=null){
+                content.append(buf).append("\n");
+            }
+            if(title == null || time == null){
+                LOGGER.error("File " + file.getAbsolutePath() + " format error.");
+                return null;
+            }else{
+                return content.toString();
+            }
+        } catch (IOException e) {
+            LOGGER.error("An error occurred while reading file: " + file.getAbsolutePath() + ".", e);
+            return null;
+        }finally {
+            if (reader != null) {
+                try {
+                    reader.close();
+                } catch (IOException e) {
+                    LOGGER.error("An error occurred while closing file: " + file.getAbsolutePath(), e);
+                }
+            }
+        }
     }
 
     @SuppressWarnings("ConstantConditions")
@@ -303,5 +358,29 @@ public class TextAnalyzeService {
             }
         }
         LOGGER.info("Destroyed TextAnalyzerService.");
+    }
+
+    public class SearchResult{
+        private int totalHits;
+        private int resultPerPage;
+        private List<SearchItem> items;
+
+        SearchResult(int totalHits, List<SearchItem> items) {
+            this.totalHits = totalHits;
+            this.items = items;
+            this.resultPerPage = RESULT_PER_PAGE;
+        }
+
+        public List<SearchItem> getItems() {
+            return items;
+        }
+
+        public int getTotalHits() {
+            return totalHits;
+        }
+
+        public int getResultPerPage() {
+            return resultPerPage;
+        }
     }
 }

@@ -15,7 +15,7 @@
          * @param animateName 弹出动作
          * @ callback 回调方法
          */
-        modalShow = function(targetModel, animateName, callback, arg){
+        modalShow = function(targetModel, animateName, callback, arg, arg1){
             var animationIn = "bounceInDown";
             if(!animateName || animationIn.indexOf(animateName)==-1){
                 console.log(animationIn.length);
@@ -25,7 +25,7 @@
             console.log(targetModel + " " + animateName);
             $(targetModel).show().animateCss(animateName);
             if(callback != undefined)
-            	callback.call(this, arg);
+            	callback.call(this, arg, arg1);
         }
         /**
          * 隐藏模态框方法
@@ -50,9 +50,9 @@
             	callback.call(this);
         }
 
-        modalDataInit = function(name){
+        modalDataInit = function(name, url){
             $.ajax({
-                url: 'http://localhost/nlp_api/public/content',
+                url: url,
                 type:'post',
                 data:{'name':name},
                 dataType:'json',
@@ -60,14 +60,19 @@
                     withCredentials: true
                 },
                 success:function (data) {
-                    $('#modal_title').html(data['title']);
-                    $('#modal_time').html("发布时间："+data['time']);
-                    $('#modal_keywords').html("关键词："+data['keywords'].toString());
-                    $('#modal_abstract').html("        文章摘要："+data['abstract']);
-                    $('#modal_content').html("        原文文本："+data['content']);
+                    if(data['code'] === 0){
+                        data = data['object'];
+                        $('#modal_title').html(data['title']);
+                        $('#modal_time').html("Public Time: "+data['time']);
+                        $('#modal_keywords').html("Keywords: "+data['keywords'].toString());
+                        $('#modal_abstract').html("        Abstract: "+data['abstracts']);
+                        $('#modal_content').html("        Original Text: "+data['content']);
+                    }else{
+                        alert(data['message']);
+                    }
                 },
                 error:function (request,status) {
-                    alert("TODO 发生错误："+request.responseText);
+                    alert(request.responseText);
                 }
             });
         }
