@@ -6,11 +6,10 @@ import org.apache.lucene.index.IndexWriter;
 import org.apache.lucene.index.IndexWriterConfig;
 import org.apache.lucene.store.Directory;
 import org.apache.lucene.store.FSDirectory;
-import org.datanewsstudio.www.common.FileSystem;
+import org.datanewsstudio.www.common.Utils;
 import org.datanewsstudio.www.textanalyzer.model.ContentItem;
 import org.datanewsstudio.www.textanalyzer.model.FileUploadResponse;
 import org.datanewsstudio.www.textanalyzer.model.NlpResult;
-import org.datanewsstudio.www.textanalyzer.model.SearchItem;
 import org.datanewsstudio.www.textanalyzer.service.TextAnalyzeService;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -69,7 +68,7 @@ public class TextAnalyzerController {
                     //如果是则先清空
                     //否则创建一个
                     if(directory.isDirectory()){
-                        File errorFile = FileSystem.removeDirectory(directory);
+                        File errorFile = Utils.removeDirectory(directory);
                         if(errorFile != null){
                             LOGGER.error("Failed to delete file: " + errorFile.getAbsolutePath());
                             emitter.complete();
@@ -185,7 +184,7 @@ public class TextAnalyzerController {
     public ModelAndView result(HttpSession session){
         //如果不存在session则返回404页面
         if(session.getAttribute("data") == null){
-            return new ModelAndView("text_analyzer/404");
+            return new ModelAndView("404");
         }
 
         ModelAndView mv = new ModelAndView("text_analyzer/result");
@@ -232,7 +231,7 @@ public class TextAnalyzerController {
                                @RequestParam("lang") String lang){
         //如果不存在session则返回404页面
         if(session.getAttribute("data") == null){
-            return new ModelAndView("text_analyzer/404");
+            return new ModelAndView("404");
         }
 
         TextAnalyzeService.SearchResult resultList = textAnalyzeService.search((Map<String, NlpResult>) session.getAttribute("data"), Paths.get(UPLOAD_PATH + session.getId(),"index.lucene"), keyword, page, lang);

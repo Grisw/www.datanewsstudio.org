@@ -28,6 +28,10 @@ $(document).ready(function () {
         autoColumnSize: true //当值为true且列宽未设置时，自适应列大小
     });
 
+    $('#input-6').on('fileclear', function() {
+        hot.clear();
+    });
+
     $("#input-6").change(function() {
         if(!$("#input-6").prop("files")) {
             return;
@@ -60,5 +64,13 @@ $(document).ready(function () {
             hot.loadData(tmp);
         };
         reader.readAsBinaryString(f);
+    });
+
+    $('#start').click(function () {
+        var data = JSON.stringify(hot.getData());
+        var form = $('#form');
+        var input = form.children('input[name="data"]');
+        input.val(data);
+        form.submit();
     });
 });

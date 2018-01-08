@@ -3,10 +3,12 @@ package org.datanewsstudio.www.common;
 import org.springframework.lang.Nullable;
 
 import java.io.File;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 
-public class FileSystem {
+public class Utils {
 
-    private FileSystem(){}
+    private Utils(){}
 
     /**
      * 删除目录，自动递归删除该目录下的所有子目录。
@@ -30,5 +32,26 @@ public class FileSystem {
             }
         }
         return null;
+    }
+
+    public static boolean isDateFormat(String x){
+        String[] dateFormat = {
+                "yyyy-MM",
+                "yyyy-MM-dd",
+                "yyyy-MM-dd HH:mm",
+                "yyyy-MM-dd HH:mm:ss",
+                "MM-dd",
+                "MM-dd HH:mm",
+                "MM-dd HH:mm:ss",
+                "HH:mm",
+                "HH:mm:ss"
+        };
+        for(String f : dateFormat){
+            try {
+                new SimpleDateFormat(f).parse(x);
+                return true;
+            } catch (ParseException ignore) { }
+        }
+        return false;
     }
 }

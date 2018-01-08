@@ -103,10 +103,13 @@
                 <div class="col-md-8">
                     <div id="table" style="overflow: auto; height: 600px; width: 100%;margin-top: 5%"></div>
 
+                    <form id="form" action="<%=Urls.VisualRecommend.charts%>" method="post">
+                        <input type="hidden" name="data">
+                    </form>
+
                     <div style="text-align:center;">
-                        <button type="button" class="btn btn-info"
-                                style="margin-top: 5%;margin-bottom:3%;font-family: '微软雅黑',sans-serif;font-size: 1.1em;"
-                                onclick="todo">Start Analyzing
+                        <button id="start" type="button" class="btn btn-info"
+                                style="margin-top: 5%;margin-bottom:3%;font-family: '微软雅黑',sans-serif;font-size: 1.1em;">Start Analyzing
                         </button>
                     </div>
                 </div>

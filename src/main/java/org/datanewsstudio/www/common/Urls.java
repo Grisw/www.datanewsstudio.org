@@ -14,6 +14,7 @@ public abstract class Urls {
 
     public static abstract class VisualRecommend {
         public static final String index = "visual_recommend";
+        public static final String charts = "visual_recommend/charts";
     }
 
     public static abstract class EventMap {
